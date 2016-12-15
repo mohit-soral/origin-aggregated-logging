@@ -1,17 +1,15 @@
 FROM openshift/base-centos7
 
-MAINTAINER OpenShift Development <dev@lists.openshift.redhat.com>
+MAINTAINER Mohit Soral <mohit.soral@siemens.com>
 
 EXPOSE 5601
 
-ENV KIBANA_VER=4.5.4 \
+ENV KIBANA_VER=5.0.1 \
     ES_HOST=localhost \
     ES_PORT=9200 \
     HOME=/opt/app-root/src \
-    KIBANA_HOME=/opt/kibana \
-    AOP_KIBANA_PLUGIN_VER=v4.5.1-0 \
-    AOP_KIBANA_PLUGIN_REPO=https://github.com/openshift/origin-kibana
-
+    KIBANA_HOME=/etc/kibana \
+    
 LABEL io.k8s.description="Kibana container for querying Elasticsearch for aggregated logs" \
   io.k8s.display-name="Kibana" \
   io.openshift.expose-services="5601:http" \
@@ -19,7 +17,7 @@ LABEL io.k8s.description="Kibana container for querying Elasticsearch for aggreg
 
 ADD kibana.repo /etc/yum.repos.d/kibana.repo
 # install the RPMs in a separate step so it can be cached
-RUN rpm --import https://packages.elastic.co/GPG-KEY-elasticsearch && \
+RUN rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch && \
     yum install -y --setopt=tsflags=nodocs \
                 kibana-${KIBANA_VER} && \
     yum clean all
