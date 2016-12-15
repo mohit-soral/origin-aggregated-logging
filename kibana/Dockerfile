@@ -23,7 +23,7 @@ RUN rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch && \
                 kibana-${KIBANA_VER} && \
     yum clean all
 
-COPY kibana.yml ${KIBANA_HOME}/config/kibana.yml
+COPY kibana.yml ${KIBANA_CONF}/kibana.yml
 COPY run.sh install.sh ${HOME}/
 RUN sh install.sh
 
