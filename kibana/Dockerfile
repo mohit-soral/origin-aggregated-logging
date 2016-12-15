@@ -8,7 +8,8 @@ ENV KIBANA_VER=5.0.1 \
     ES_HOST=localhost \
     ES_PORT=9200 \
     HOME=/opt/app-root/src \
-    KIBANA_HOME=/etc/kibana \
+    KIBANA_CONF=/etc/kibana \
+    KIBANA_HOME=/usr/share/kibana \
     
 LABEL io.k8s.description="Kibana container for querying Elasticsearch for aggregated logs" \
   io.k8s.display-name="Kibana" \
