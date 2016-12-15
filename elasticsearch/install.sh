@@ -5,7 +5,6 @@ set -ex
 mkdir -p ${HOME}
 ln -s /usr/share/elasticsearch /usr/share/java/elasticsearch
 
-/usr/share/elasticsearch/bin/plugin install -b com.floragunn/search-guard-ssl/${SG_SSL_VER}
 /usr/share/elasticsearch/bin/plugin install -b com.floragunn/search-guard-2/${SG_VER}
 /usr/share/elasticsearch/bin/plugin install io.fabric8/elasticsearch-cloud-kubernetes/${ES_CLOUD_K8S_VER}
 /usr/share/elasticsearch/bin/plugin install io.fabric8.elasticsearch/openshift-elasticsearch-plugin/${OSE_ES_VER}
