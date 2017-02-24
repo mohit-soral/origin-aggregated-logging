@@ -24,7 +24,7 @@ ADD kibana.repo /etc/yum.repos.d/kibana.repo
 #    yum clean all
 
 RUN rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch && \
-    wget https://artifacts.elastic.co/downloads/kibana/kibana-${KIBANA_VER}-x86_64.rpm \
+    wget https://artifacts.elastic.co/downloads/kibana/kibana-${KIBANA_VER}-x86_64.rpm && \
     rpm --install kibana-${KIBANA_VER}-x86_64.rpm
 
 COPY kibana.yml ${KIBANA_CONF}/kibana.yml
