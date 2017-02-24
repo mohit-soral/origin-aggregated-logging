@@ -18,14 +18,20 @@ LABEL io.k8s.description="Kibana container for querying Elasticsearch for aggreg
 
 ADD kibana.repo /etc/yum.repos.d/kibana.repo
 # install the RPMs in a separate step so it can be cached
+#RUN rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch && \
+#    yum install -y --setopt=tsflags=nodocs \
+#                kibana-${KIBANA_VER} && \
+#    yum clean all
+
 RUN rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch && \
-    yum install -y --setopt=tsflags=nodocs \
-                kibana-${KIBANA_VER} && \
-    yum clean all
+    wget https://artifacts.elastic.co/downloads/kibana/kibana-${KIBANA_VER}-x86_64.rpm
+    rpm --install kibana-${KIBANA_VER}-x86_64.rpm
 
 COPY kibana.yml ${KIBANA_CONF}/kibana.yml
-COPY run.sh install.sh ${HOME}/
-RUN sh install.sh
+# install.sh just starts kibana and verifies that it runs. So I am ignoring it for now.
+#COPY run.sh install.sh ${HOME}/
+#RUN sh install.sh
+COPY run.sh ${HOME}/
 
 USER default
 
